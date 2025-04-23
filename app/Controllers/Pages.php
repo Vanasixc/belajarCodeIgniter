@@ -73,5 +73,22 @@ class Pages extends BaseController
     {
         echo "<h1>Hello World</h1>";
     }
+
+    public function postLogin()
+    {
+
+        $rules = [
+            'user' => ['label' => 'user', 'rules' => 'required'],
+            'pass' => ['label' => 'pass', 'rules' => 'required']
+        ];
+        $validation = service('validation');
+        $validation->setRules($rules);
+        if (!$validation->withRequest($this->request)->run()) {
+            // masuk ke if arti validasi gagal
+            echo "validasi gagal";
+            return;
+        }
+        echo "validasi sukses";
+    }
 }
 
